@@ -52,7 +52,9 @@ crossorigin=""/>
     <title id="title">Dashboard</title>
     <script src="js/dash.js"></script>
     <script src="js/index.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.18/dist/css/uikit.min.css" />
     <link rel="stylesheet" href="css/style.css">
+    
 </head>
 <body>
     <nav class="z-depth-0">
@@ -60,7 +62,7 @@ crossorigin=""/>
           <a href="Dash.html" id="logo" class="brand-logo center">Ge0tagger</a>
           <a id="ham" href="#" data-target="mobile-links" class="sidenav-trigger  "><i class="material-icons">menu</i></a>
           <ul id="nav-mobile" class="right ">
-            <li ><a id="search" href="sass.html"><i class="material-icons">search</i></a></li>
+            <li ><a id="search" href="#" uk-search-icon uk-toggle><i class="material-icons" >search</i></a></li>
           </ul>
           
         </div>
@@ -83,7 +85,19 @@ crossorigin=""/>
 </ul>
   
     <h1 id='welcome'>welcome back</h1>
-    <div id="aligned"><input class="uk-search-input" type="search" placeholder="Search"></div>
+    <!-- <div id="aligned">
+      <span uk-search-icon></span><form class="uk-search uk-search-small">
+      
+      <input class="uk-search-input" type="search" placeholder="Search">
+  </form></div> -->
+  <div id="modal-full" class="uk-modal-full uk-modal" uk-modal>
+    <div class="uk-modal-dialog uk-flex uk-flex-center uk-flex-middle" uk-height-viewport>
+        <button class="uk-modal-close-full" type="button" uk-close></button>
+        <form class="uk-search uk-search-large">
+            <input class="uk-search-input uk-text-center" type="search" placeholder="Search" autofocus>
+        </form>
+    </div>
+</div>
    
 
     

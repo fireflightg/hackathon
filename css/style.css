@@ -398,10 +398,13 @@ button{
 textarea{
     width: 50%;
 }
-input{
-    text-align: center;
-    width: 50%;
-}
+/* input{
+  
+    
+    border: none !important;
+    font-family: 'Montserrat';
+    text-align: left;
+} */
 a{ 
     text-decoration: none;
     
@@ -410,8 +413,8 @@ a{
 #br{
     text-align: center;
 }
-input {
-  all: revert;
+/* input {
+  all: revert ;
   position: relative;
   background: 0;
   border: 10%;
@@ -423,9 +426,9 @@ input {
   
   text-align: center;
   margin: 0 auto;
-}
+} */
 
-  input:focus {
+  /* input:focus {
     padding-bottom: 5px;
   }
 
@@ -433,7 +436,7 @@ input {
   input:focus {
   
       transform: scaleX(1);
-    }
+    } */
 #aligned{
   text-align: center;
   padding: 2vw;
