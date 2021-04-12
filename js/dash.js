@@ -1,5 +1,5 @@
 firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
+    if (user) { 
         console.log(user.uid);
         var welcome = document.getElementById('welcome');
         var infoname = document.getElementById('infoname');

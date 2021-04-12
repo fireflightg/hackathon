@@ -7,26 +7,33 @@
 
 <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
+     <script src="https://cdn.maptiler.com/maptiler-geocoder/v1.1.0/maptiler-geocoder.js"></script>
+     <link href="https://cdn.maptiler.com/maptiler-geocoder/v1.1.0/maptiler-geocoder.css" rel="stylesheet" />
 <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
+
+
 
 <script>
   // Your web app's Firebase configuration
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   var firebaseConfig = {
-    apiKey: "AIzaSyA4PV9UE-ue1-PWmlE7UMK1Zsi-5EiK6X8",
-    authDomain: "hackthon-8ea4b.firebaseapp.com",
-    projectId: "hackthon-8ea4b",
-    storageBucket: "hackthon-8ea4b.appspot.com",
-    messagingSenderId: "940844216417",
-    appId: "1:940844216417:web:c7780d1afb1006ebcf7a20",
-    measurementId: "G-7D418CTVEM"
+    apiKey: "AIzaSyAGsfdkjppVjAnFoP2lk8PLaiwbKdnSg08",
+    authDomain: "shopp-8ef5d.firebaseapp.com",
+    databaseURL: "https://shopp-8ef5d-default-rtdb.firebaseio.com",
+    projectId: "shopp-8ef5d",
+    storageBucket: "shopp-8ef5d.appspot.com",
+    messagingSenderId: "1056813294814",
+    appId: "1:1056813294814:web:f60458b13a529cff750e4f",
+    measurementId: "G-WEJRNFBKD4"
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();
 </script>
+
+
 <!-- UIkit CSS -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.18/dist/css/uikit.min.css" />
@@ -59,7 +66,7 @@ crossorigin=""/>
 <body>
     <nav class="z-depth-0">
         <div class="nav-wrapper z-depth-0" >
-          <a href="Dash.html" id="logo" class="brand-logo center">Ge0tagger</a>
+          <a href="Dash.html" id="logo" class="brand-logo center" style="text-align: center;">Ge0tagger</a>
           <a id="ham" href="#" data-target="mobile-links" class="sidenav-trigger  "><i class="material-icons">menu</i></a>
           <ul id="nav-mobile" class="right ">
             <li ><a id="search" href="#" uk-search-icon uk-toggle><i class="material-icons" >search</i></a></li>
@@ -90,19 +97,39 @@ crossorigin=""/>
       
       <input class="uk-search-input" type="search" placeholder="Search">
   </form></div> -->
-  <div id="modal-full" class="uk-modal-full uk-modal" uk-modal>
-    <div class="uk-modal-dialog uk-flex uk-flex-center uk-flex-middle" uk-height-viewport>
-        <button class="uk-modal-close-full" type="button" uk-close></button>
-        <form class="uk-search uk-search-large">
-            <input class="uk-search-input uk-text-center" type="search" placeholder="Search" autofocus>
-        </form>
-    </div>
-</div>
    
 
     
-    <div id='align'><div id="mapid"></div></div>
+    
+    <div class="uk-position-relative uk-light" uk-slideshow>
+
+      <ul class="uk-slideshow-items">
+         
+          <li>
+            <h2 id="logo" class="brand-logo center">my list</h2>
+              <button id="add item"> </button>
+          </li>
+          <li>
+            <h2 id="logo" class="brand-logo center">search stores</h2>
+            <div id='align'><div id="mapid" uk-cover></div></div>
+          </li>
+          <li>
+           <h2 id="logo" class="brand-logo center">Find your items</h2> 
+              <img src="images/size1.jpg" alt="" uk-cover>
+          </li>
+      </ul>
+  
+      <div class="uk-position-bottom-center uk-position-small">
+          <ul class="uk-dotnav">
+              <li uk-slideshow-item="0"><a href="#">Item 1</a></li>
+              <li uk-slideshow-item="1"><a href="#">Item 2</a></li>
+              <li uk-slideshow-item="2"><a href="#">Item 3</a></li>
+          </ul>
+      </div>
+  
+  </div>
 <script type="text/javascript">
+function maps(){
 if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition);
           } else {
@@ -114,7 +141,7 @@ if (navigator.geolocation) {
             console.log(position.coords.latitude);
             
           
-var mymap = L.map('mapid',{ zoomControl: false, minZoom: 12 }).setView([-83.06200108196722, 40.113337532786886],0);
+var mymap = L.map('mapid',{ zoomControl: false, minZoom: 16 }).setView([-83.06200108196722, 40.113337532786886],0);
 
     L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}@2x.png?key=OjZZ4hlCy05Bf5ITef5N',{
         //attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
@@ -186,6 +213,7 @@ id = navigator.geolocation.watchPosition(success, error, options);
         
     
     }
+}
 }
     </script> 
    

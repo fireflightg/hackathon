@@ -3,7 +3,7 @@ firebase.auth().onAuthStateChanged(function(user) {
       
         var welcome = document.getElementById('welcome');
         welcome.innerText = "Welcome Back " + user.displayName;
-        login.signed();
+        login.signed(); 
         
       // User is signed in.
     } else {
