@@ -58,20 +58,45 @@ crossorigin=""/>
     
     <title id="title">Dashboard</title>
     <script src="js/dash.js"></script>
+    <script src="js/hide.js"></script>
     <script src="js/index.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.18/dist/css/uikit.min.css" />
     <link rel="stylesheet" href="css/style.css">
     
 </head>
-<body>
+<body onload="hide.search()">
     <nav class="z-depth-0">
         <div class="nav-wrapper z-depth-0" >
-          <a href="Dash.html" id="logo" class="brand-logo center" style="text-align: center;">Ge0tagger</a>
-          <a id="ham" href="#" data-target="mobile-links" class="sidenav-trigger  "><i class="material-icons">menu</i></a>
+          <a href="Dash.html" id="logo" class="brand-logo center uk-animation-fade" style="text-align: center;">Ge0tagger</a>
+         
+          <a id="ham" href="#" data-target="mobile-links" class="sidenav-trigger uk-animation-fade  "><i class="material-icons">menu</i></a>
           <ul id="nav-mobile" class="right ">
-            <li ><a id="search" href="#" uk-search-icon uk-toggle><i class="material-icons" >search</i></a></li>
+            
+            <li ><a id="search" href="#"  uk-toggle><i class="material-icons uk-animation-fade" onclick="hide.whilesearch()" >search</i></a></li>
+            
           </ul>
-          
+          <div id="nav-set" class="uk-search uk-search-large">
+            <input id="sea" style="padding: 1% 6%;
+            box-sizing: border-box;
+           -webkit-box-sizing: border-box;
+           -moz-box-sizing: border-box;
+           border:1px solid #BEBEBE;
+           -webkit-transition: all 0.30s ease-in-out;
+           -moz-transition: all 0.30s ease-in-out;
+           -ms-transition: all 0.30s ease-in-out;
+           -o-transition: all 0.30s ease-in-out;
+           outline: none;  
+           height: 33px; -moz-box-shadow: 0 0 8px #000000;
+    -webkit-box-shadow: 0 0 8px #ffffff;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0);
+    color: #000000;
+    font-family: 'Montserrat';
+    margin-right: 50%; 
+    border-radius: 10px;
+    text-align: center;
+    width: 100%; " class=" brand-logo center uk-search-input uk-animation-fade" type="search" placeholder="Search">
+          </div>
         </div>
       </nav>
      
@@ -106,11 +131,11 @@ crossorigin=""/>
       <ul class="uk-slideshow-items">
          
           <li>
-            <h2 id="logo" class="brand-logo center">my list</h2>
+            <h2 id="logo" class="brand-logo center">My List</h2>
               <button id="add item"> </button>
           </li>
           <li>
-            <h2 id="logo" class="brand-logo center">search stores</h2>
+            <h2 id="logo" class="brand-logo center">Nearby Stores</h2>
             <div id='align'><div id="mapid" uk-cover></div></div>
           </li>
           <li>
