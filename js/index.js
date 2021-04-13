@@ -7,6 +7,7 @@ firebase.auth().onAuthStateChanged(function(user) {
         
       // User is signed in.
     } else {
+      firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
       login.start();
     }
   });
@@ -151,13 +152,13 @@ signin: function(){
     var passval = password.value;
     console.log("Signin");
     
-        if(emailval == ""||passval == ""){
+  
             Email.style.visibility = 'visible';
             password.style.visibility = 'visible';
             BackButton.style.display = 'block';
             Up.style.display = 'none';
-        }
-        else{
+     
+    
             console.log("Signinv");
         if(!emailval.includes('@') || emailval == undefined){
             console.log("Please enter a email");
@@ -169,25 +170,26 @@ signin: function(){
         }
         else{
             console.log("Signinok");
-            firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
-  .then(() => {
-
             firebase.auth().signInWithEmailAndPassword(emailval, passval)
+
+
+    
   .then((userCredential) => {
     // Signed in
     var user = userCredential.user;
     // ...
   })
   .catch((error) => {
+    firebase.auth().signOut();
       alert("Error signing in");
     var errorCode = error.code;
     var errorMessage = error.message;
   });
 
         
-    });
+   
 }
-}
+
 
 },
 logout: function(){
