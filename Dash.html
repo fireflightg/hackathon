@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+      document.cookie = "witcher=Geralt; SameSite=None; Secure"
+      alert( document.cookie );
+  </script>
     <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
 
 <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
-     <script src="https://cdn.maptiler.com/maptiler-geocoder/v1.1.0/maptiler-geocoder.js"></script>
-     <link href="https://cdn.maptiler.com/maptiler-geocoder/v1.1.0/maptiler-geocoder.css" rel="stylesheet" />
+
 <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
@@ -32,7 +35,8 @@
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();
 </script>
-
+<script src='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css' rel='stylesheet' />
 
 <!-- UIkit CSS -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
@@ -133,11 +137,12 @@ crossorigin=""/>
          
           <li>
             <h2 id="logo" class="brand-logo center">My List</h2>
+            
               <button id="add item"> </button>
           </li>
           <li>
             <h2 id="logo" class="brand-logo center">Nearby Stores</h2>
-            <div id='align'><div id="mapid" uk-cover></div></div>
+            <div  id="mapid" uk-cover></div>
           </li>
           <li>
            <h2 id="logo" class="brand-logo center">Find your items</h2> 
@@ -156,7 +161,7 @@ crossorigin=""/>
   
   </div>
 <script type="text/javascript">
-function maps(){
+
 if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition);
           } else {
@@ -168,9 +173,9 @@ if (navigator.geolocation) {
             console.log(position.coords.latitude);
             
           
-var mymap = L.map('mapid',{ zoomControl: false, minZoom: 16 }).setView([-83.06200108196722, 40.113337532786886],0);
+var mymap = L.map('mapid',{ zoomControl: false, minZoom: 14 }).setView([-83.06200108196722, 40.113337532786886],0);
 
-    L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}@2x.png?key=OjZZ4hlCy05Bf5ITef5N',{
+    L.tileLayer('https://tile.thunderforest.com/neighbourhood/{z}/{x}/{y}.png?apikey=6be4ff23ad7640bbb296bfdf731f0886',{
         //attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
     }).addTo(mymap);
 
@@ -196,7 +201,7 @@ function success(pos) {
      long =  crd.longitude;
     console.log(crd.latitude);
     mae.setLatLng(latlng);
-    print.innerText = "longitude: " + position.coords.longitude + "latitude: " + position.coords.latitude;
+    // print.innerText ="longitude: " + position.coords.longitude + "latitude: " + position.coords.latitude;
 });
 };
 
@@ -241,7 +246,8 @@ id = navigator.geolocation.watchPosition(success, error, options);
     
     }
 }
-}
+
+
     </script> 
    
  

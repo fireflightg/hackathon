@@ -21,8 +21,8 @@ body {
   #align{
     text-align: center;
   }
-  #mapid { margin: 0 auto; 
-    height: 40%;
+  #mapid { /* margin: 0 auto;  */
+    height: 20vh;
             width: 80%;
           text-align: center; }
   #welcome, h1{

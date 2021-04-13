@@ -1,3 +1,5 @@
+cookie('SameSite', 'None');
+cookie('Secure');
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       
