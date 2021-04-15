@@ -35,8 +35,7 @@
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();
 </script>
-<script src='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.js'></script>
-<link href='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css' rel='stylesheet' />
+
 
 <!-- UIkit CSS -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
@@ -68,7 +67,7 @@ crossorigin=""/>
     <link rel="stylesheet" href="css/style.css">
     
 </head>
-<body onload="hide.search()">
+<body onload="hide.search()" >
     <nav class="z-depth-0">
         <div class="nav-wrapper z-depth-0" >
           <a href="Dash.html" id="logo" class="brand-logo center uk-animation-fade" style="text-align: center;">Ge0tagger</a>
@@ -79,7 +78,7 @@ crossorigin=""/>
             <li ><a id="search" href="#"  uk-toggle><i class="material-icons uk-animation-fade" onclick="hide.whilesearch()" >search</i></a></li>
             
           </ul>
-          <div id="nav-set" class=" brand-logo center uk-search uk-search-large">
+          <div id="nav-set" class=" brand-logo center uk-search uk-search-medium">
             <input id="sea" style="padding: 1% 6%;
             box-sizing: border-box;
            -webkit-box-sizing: border-box;
@@ -133,56 +132,69 @@ crossorigin=""/>
     
     <div class="uk-position-relative uk-light" uk-slideshow>
 
-      <ul class="uk-slideshow-items">
+      <ul class=>
          
-          <li>
+          <li class="uk-card uk-card-default uk-card-body uk-width-1-1@m">
             <h2 id="logo" class="brand-logo center">My List</h2>
+            <input id="lister" style="padding: 1% 6%;
+            box-sizing: border-box;
+           -webkit-box-sizing: border-box;
+           -moz-box-sizing: border-box;
+           border:1px solid #BEBEBE;
+           -webkit-transition: all 0.30s ease-in-out;
+           -moz-transition: all 0.30s ease-in-out;
+           -ms-transition: all 0.30s ease-in-out;
+           -o-transition: all 0.30s ease-in-out;
+           outline: none;  
+           -moz-box-shadow: 0 0 8px #000000;
+    -webkit-box-shadow: 0 0 8px #000000;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0);
+    border: 1px solid rgba(0, 0, 0, 0);
+    color: #000000;
+    font-family: 'Montserrat';
+    margin-right: 50%; 
+    border-radius: 15px;
+    text-align: center;
+    padding: 3vw;
+    transform: border 1s;
+    
+    width: 100%; " class="  uk-search-input uk-animation-fade" type="search" placeholder="Add An Item">
             
-              <button id="add item"> </button>
+              <button style="padding:.1%;" id="add item">+</button>
+              <ul onscroll="hide.checklist()"  id="itemlist"></ul>
           </li>
-          <li>
-            <h2 id="logo" class="brand-logo center">Nearby Stores</h2>
-            <div  id="mapid" uk-cover></div>
+          <li id="mapc" class="uk-card uk-card-default uk-card-body uk-width-1-1@m">
+           
+            <div onload="" id="mapid" uk-cover></div>
           </li>
-          <li>
+          <li class="uk-card uk-card-default uk-card-body uk-width-1-1@m">
            <h2 id="logo" class="brand-logo center">Find your items</h2> 
-              <img src="images/size1.jpg" alt="" uk-cover>
+           <button style="padding:.1%; margin: 0 auto;" id="add item">Let's Go</button>
           </li>
       </ul>
   
-      <div class="uk-position-bottom-center uk-position-small">
-          <ul class="uk-dotnav">
-              <li uk-slideshow-item="0"><a href="#">Item 1</a></li>
-              <li uk-slideshow-item="1"><a href="#">Item 2</a></li>
-              <li uk-slideshow-item="2"><a href="#">Item 3</a></li>
-          </ul>
-      </div>
+    
 
   
   </div>
+  <script src="js/dash.js"></script>
 <script type="text/javascript">
 
-if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-          } else {
-            console.log("Geolocation is not supported by this browser.");
-            
-          }
-          function showPosition(position) {
-            console.log(position.coords.longitude);
-            console.log(position.coords.latitude);
-            
-          
-var mymap = L.map('mapid',{ zoomControl: false, minZoom: 14 }).setView([-83.06200108196722, 40.113337532786886],0);
 
-    L.tileLayer('https://tile.thunderforest.com/neighbourhood/{z}/{x}/{y}.png?apikey=6be4ff23ad7640bbb296bfdf731f0886',{
+
+     
+          
+
+navigator.geolocation.getCurrentPosition(function(position) {
+  var mymap = L.map('mapid',{ zoomControl: false, minZoom: 16 }).setView([position.coords.latitude, position.coords.longitude],0);
+
+    L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=OjZZ4hlCy05Bf5ITef5N',{
         //attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
     }).addTo(mymap);
 
     var mae = L.marker([position.coords.latitude,position.coords.longitude]).addTo(mymap);
     var id, target, option;
 var long,lat
-navigator.geolocation.getCurrentPosition(function(position) {
     var print = document.getElementById('print'); 
     console.log(position.coords.longitude);
      lat = position.coords.latitude;
@@ -245,7 +257,24 @@ id = navigator.geolocation.watchPosition(success, error, options);
         
     
     }
+
+function showError(error) {
+    switch (error.code) {
+        case error.PERMISSION_DENIED:
+            x.innerHTML = "User denied the request for Geolocation."
+            break;
+        case error.POSITION_UNAVAILABLE:
+            x.innerHTML = "Location information is unavailable."
+            break;
+        case error.TIMEOUT:
+            x.innerHTML = "The request to get user location timed out."
+            break;
+        case error.UNKNOWN_ERROR:
+            x.innerHTML = "An unknown error occurred."
+            break;
+    }
 }
+
 
 
     </script> 

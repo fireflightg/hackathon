@@ -22,6 +22,18 @@ var hide = {
         ham.style.display = 'none';
      
 
-    }
+    },
+    checklist: function(){
+        var uid = firebase.auth().currentUser.uid; 
+        console.log(uid);
+        console.log("gottem");
+        var mainacct = firebase.database().ref().child(uid);
+        var def = mainacct.child("list")
+        def.on('value', snap => {
+          var list = snap.val();
+        });
+        console.log(list);
+        
+      }
 
 }

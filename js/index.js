@@ -123,7 +123,7 @@ firebase.auth().onAuthStateChanged(function(user) {
         email: user.email,
         uid: user.uid,
         name: nameval,
-        reported: ''
+        list: ''
       });
       user.updateProfile({
         displayName: document.getElementById("Name").value
