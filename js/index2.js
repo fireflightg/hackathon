@@ -45,6 +45,7 @@ options = {
   maximumAge: 0
 };
 
+
 id = navigator.geolocation.watchPosition(success, error, options); 
 var Geo = {
 
