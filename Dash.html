@@ -130,11 +130,11 @@ crossorigin=""/>
 
     
     
-    <div class="uk-position-relative uk-light" uk-slideshow>
+    <div  class="uk-position-relative uk-light" uk-slideshow>
 
       <ul class=>
          
-          <li class="uk-card uk-card-default uk-card-body uk-width-1-1@m">
+          <li id="b" class="uk-card uk-card-default uk-card-body uk-width-1-1@m">
             <h2 id="logo" class="brand-logo center">My List</h2>
             <input id="lister" style="padding: 1% 6%;
             box-sizing: border-box;
@@ -158,10 +158,14 @@ crossorigin=""/>
     padding: 3vw;
     transform: border 1s;
     
-    width: 100%; " class="  uk-search-input uk-animation-fade" type="search" placeholder="Add An Item">
+    width: 100%; "  class="  uk-search-input uk-animation-fade" type="search" placeholder="Add An Item">
             
               <button style="padding:.1%;" id="add item">+</button>
-              <ul onscroll="hide.checklist()"  id="itemlist"></ul>
+              <div id="v">
+              <ul class="brand-logo center" id="list">
+                <li id="a"><p class='s'>Item</p> <p class='s2'>Count</p>
+              </ul>
+            </div>
           </li>
           <li id="mapc" class="uk-card uk-card-default uk-card-body uk-width-1-1@m">
            
