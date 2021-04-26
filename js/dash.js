@@ -1,6 +1,31 @@
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) { 
         console.log(user.uid);
+        var getuser = firebase.database().ref().child('User')
+        var uided = getuser.child(user.uid);
+        var getuid = uided.child('list');
+        getuid.on('value',snap=>{
+     
+           snap.forEach(listitem=>{
+           console.log(listitem.key);
+           console.log(listitem.val());
+           var li = document.createElement("li"); 
+           var att = document.createAttribute("class");       // Create a "class" attribute
+            att.value = "uk-list uk-list-divider"; 
+            var id = document.createAttribute("id");
+            id.value = "alige" 
+            li.setAttributeNode(att);
+            li.setAttributeNode(id);
+            
+            li.innerHTML = "<p class='s'>"+listitem.key+"</p> <p class=s2>" +listitem.val()+"</p>"  
+
+
+           var l = document.getElementById('list').appendChild(li);
+     
+     
+         });
+     
+        });
         var welcome = document.getElementById('welcome');
         var infoname = document.getElementById('infoname');
         var infoemail = document.getElementById('infoemail');
@@ -90,7 +115,12 @@ firebase.auth().onAuthStateChanged(function(user) {
         
         }
     },
-   
+   getlist: function(){
+    var uid = firebase.auth().currentUser.uid;   
+    console.log(uid);
+    
+  
+   }
     
             
     }
