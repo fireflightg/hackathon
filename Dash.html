@@ -68,6 +68,7 @@ crossorigin=""/>
     
 </head>
 <body onload="hide.search()" >
+  <div style="text-align: center;">
     <nav class="z-depth-0">
         <div class="nav-wrapper z-depth-0" >
           <a href="Dash.html" id="logo" class="brand-logo center uk-animation-fade" style="text-align: center;">Ge0tagger</a>
@@ -160,13 +161,21 @@ crossorigin=""/>
     
     width: 100%; "  class="  uk-search-input uk-animation-fade" type="search" placeholder="Add An Item">
             
-              <button style="padding:.1%;" id="add item">+</button>
-              <div id="v">
-              <ul class="brand-logo center" id="list">
-                <li id="a"><p class='s'>Item</p> <p class='s2'>Count</p>
-              </ul>
+              <button style="padding:1%;" id="additem">+ Add Item</button>
+              <div class="uk-align-center"  id="v">
+             
+                <table  class="uk-align-center">
+                <tr class="uk-align-center uk-align-right@m">
+                  <th >Item</th>
+                  <th >Amount</th>
+                  <th>Stock</th>
+             
+                </tr>
+              </table>
+            
+              
             </div>
-          </li>
+          
           <li id="mapc" class="uk-card uk-card-default uk-card-body uk-width-1-1@m">
            
             <div onload="" id="mapid" uk-cover></div>
@@ -192,7 +201,7 @@ crossorigin=""/>
 navigator.geolocation.getCurrentPosition(function(position) {
   var mymap = L.map('mapid',{ zoomControl: false, minZoom: 16 }).setView([position.coords.latitude, position.coords.longitude],0);
 
-    L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=OjZZ4hlCy05Bf5ITef5N',{
+    L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=BEng0MJJ8C2R55bDMS0O',{
         //attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
     }).addTo(mymap);
 
@@ -282,7 +291,7 @@ function showError(error) {
 
 
     </script> 
-   
+   </div>
  
 </body>
 </html>
