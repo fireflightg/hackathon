@@ -15,7 +15,9 @@ firebase.auth().onAuthStateChanged(function(user) {
         var title = document.getElementById('title');
         title.innerText = user.displayName + " Dashboard";
         // User is signed in.
+
         setTimeout(lis(), 3000);
+        return true;
 
     } else {
         console.log(user.uid);
@@ -32,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // }
 
+window.e = 0;
 
 function lis() {
     console.log(useruid);
@@ -41,27 +44,41 @@ function lis() {
 
 
     var getuid = uided.child('list');
-    getuid.on('value', snap => {
-        console.log("ak");
 
-        snap.forEach(listitem => {
-            console.log(listitem.key);
-            console.log(listitem.val());
-            var li = document.createElement("tr");
-
-            console.log("completed");
-            li.innerHTML = "<th>" + listitem.key + "</th>" + "<th>" + listitem.val() + "</th>" + "<th>" + "None" + "</th>";
+    if (e == 0) {
+        e = e + 1;
+        getuid.once('value', snap => {
+            console.log("ak");
 
 
+            snap.forEach(listitem => {
 
-            var l = document.getElementById('table1').appendChild(li);
+                console.log(listitem.key);
+                // console.log(listitem.val());
+                console.log("no life");
+
+                var li = document.createElement("tr");
+
+
+                console.log("completed");
+                li.innerHTML = "<th>" + listitem.key + "</th>" + "<th>" + listitem.val() + "</th>" + "<th>" + "None" + "</th>";
+                console.log("no mug");
+
+
+                var l = document.getElementById('table1').appendChild(li);
+
+
+
+            });
+
+            console.log("ur mom");
+            console.log(e);
+
+
+
 
         });
-
-
-
-
-    });
+    }
 }
 
 var pushdata = {
@@ -130,12 +147,47 @@ var pushdata = {
 
         }
     },
-    getlist: function() {
+    addlist: function() {
+        console.log(useruid);
         var uid = firebase.auth().currentUser.uid;
-        console.log(uid);
+        var getuser = firebase.database().ref().child('User')
+        var uided = getuser.child(useruid);
+        var listitem = document.getElementById('lister');
+        var amount = document.getElementById('amount');
+        var verifychildren = 0;
+        var getuid = uided.child('list');
+        getuid.once('value', snap => {
+            verifychildren = snap.numChildren();
+            console.log(verifychildren);
+            if (verifychildren == 0) {
+                getuid.child(listitem.value).set(amount.value);
+                listitem.innerText = '';
+                amount.innerText = '';
+
+            } else {
+                getuid.child(listitem.value).set(amount.value);
+
+                var li = document.createElement("tr");
+                li.innerHTML = "<th>" + listitem.value + "</th>" + "<th>" + amount.value + "</th>" + "<th>" + "None" + "</th>";
+                var l = document.getElementById('table1').appendChild(li);
+                listitem.value = '';
+                amount.value = '';
+
+            }
+        });
+
+
 
 
     }
 
 
 }
+
+function init() {
+    // Clear forms here
+    var listitem = document.getElementById('lister').value = "";
+    var amount = document.getElementById('amount').value = "";
+
+}
+window.onload = init;

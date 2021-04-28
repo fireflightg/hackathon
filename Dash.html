@@ -138,7 +138,7 @@
 
                 <li id="b" class="uk-card uk-card-default uk-card-body uk-width-1-1@m">
                     <h2 id="logo" class="brand-logo center">My List</h2>
-                    <input id="lister" style="padding: 1% 6%;
+                    <input onfocus="this.value=''" id="lister" style="padding: 1% 6%;
             box-sizing: border-box;
            -webkit-box-sizing: border-box;
            -moz-box-sizing: border-box;
@@ -162,8 +162,32 @@
     transform: border 1s;
     
     width: 100%; " class="  uk-search-input uk-animation-fade" type="search" placeholder="Add An Item">
+                    <input onfocus="this.value=''" id="amount" style="padding: 1% 6%;
+    box-sizing: border-box;
+   -webkit-box-sizing: border-box;
+   -moz-box-sizing: border-box;
+   border:1px solid #BEBEBE;
+   -webkit-transition: all 0.30s ease-in-out;
+   -moz-transition: all 0.30s ease-in-out;
+   -ms-transition: all 0.30s ease-in-out;
+   -o-transition: all 0.30s ease-in-out;
+   outline: none;  
+   -moz-box-shadow: 0 0 8px #000000;
+-webkit-box-shadow: 0 0 8px #000000;
+box-shadow: 0 0 8px rgba(0, 0, 0, 0);
+border: 1px solid rgba(0, 0, 0, 0);
 
-                    <button style="padding:1%;" id="additem">+ Add Item</button>
+color: #000000;
+font-family: 'Montserrat';
+margin-right: 50%; 
+border-radius: 15px;
+text-align: center;
+padding: 3vw;
+transform: border 1s;
+
+width: 100%; " class="  uk-search-input uk-animation-fade" type="number" placeholder="Amount">
+
+                    <button style="padding:1%;" id="additem" onclick="pushdata.addlist()">+ Add Item</button>
                     <div class="container">
 
                         <table id="table1">

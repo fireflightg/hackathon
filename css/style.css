@@ -653,3 +653,7 @@ th {
 #lister::placeholder {
     color: gray;
 }
+
+#amount::placeholder {
+    color: gray;
+}
