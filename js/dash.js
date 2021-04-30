@@ -58,10 +58,12 @@ function lis() {
                 console.log("no life");
 
                 var li = document.createElement("tr");
-
+                // var att = document.createAttribute("onclick"); // Create a "class" attribute
+                // att.value = "pushdata.remove()";
+                // li.setAttributeNode(att);
 
                 console.log("completed");
-                li.innerHTML = "<th>" + listitem.key + "</th>" + "<th>" + listitem.val() + "</th>" + "<th>" + "None" + "</th>";
+                li.innerHTML = "<th>" + listitem.key + "</th>" + "<th>" + listitem.val() + "</th>" + "<th p class='pbutton' onclick = 'pushdata.remove()' >" + "delete" + "</th>";
                 console.log("no mug");
 
 
@@ -168,7 +170,7 @@ var pushdata = {
                 getuid.child(listitem.value).set(amount.value);
 
                 var li = document.createElement("tr");
-                li.innerHTML = "<th>" + listitem.value + "</th>" + "<th>" + amount.value + "</th>" + "<th>" + "None" + "</th>";
+                li.innerHTML = "<th>" + listitem.value + "</th>" + "<th>" + amount.value + "</th>" + "<th>" + "x" + "</th>";
                 var l = document.getElementById('table1').appendChild(li);
                 listitem.value = '';
                 amount.value = '';
@@ -177,6 +179,10 @@ var pushdata = {
         });
 
 
+
+
+    },
+    remove: function() {
 
 
     }

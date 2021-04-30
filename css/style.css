@@ -657,3 +657,17 @@ th {
 #amount::placeholder {
     color: gray;
 }
+
+.pbutton {
+    cursor: pointer;
+    opacity: 1;
+    transition: opacity .75s;
+}
+
+.pbutton:hover {
+    opacity: .2;
+}
+
+.pbutton:focus {
+    opacity: .2;
+}
