@@ -602,7 +602,8 @@ tr {
     text-align: center;
 }
 
-#additem {
+#additem,
+.buttonstyle {
     margin: 0 auto;
     width: 0 auto;
     border-radius: 20px;
@@ -614,9 +615,10 @@ tr {
     transition: color 1s;
 }
 
-#additem:hover {
+#additem:hover,
+.buttonstyle:hover {
     color: black;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(226, 226, 226);
 }
 
 div.container {
@@ -654,8 +656,24 @@ th {
     color: gray;
 }
 
-#amount::placeholder {
+#amount::placeholder,
+input {
     color: gray;
+}
+
+input {
+    margin: 0 auto;
+    width: 0 auto;
+    border-radius: 20px;
+    border-width: thin;
+    border-color: transparent;
+    background-color: rgb(75, 75, 75);
+    transition: background-color 1s;
+    transition: border-color 1s;
+}
+
+input:focus {
+    border-color: black;
 }
 
 .pbutton {
