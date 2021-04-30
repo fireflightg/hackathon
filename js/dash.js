@@ -15,11 +15,12 @@ firebase.auth().onAuthStateChanged(function(user) {
         var title = document.getElementById('title');
         title.innerText = user.displayName + " Dashboard";
         // User is signed in.
-
+        hide.search();
         setTimeout(lis(), 3000);
         return true;
 
     } else {
+        hide.search();
         console.log(user.uid);
 
     }

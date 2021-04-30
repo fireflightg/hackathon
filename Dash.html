@@ -57,15 +57,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
     <title id="title">Dashboard</title>
-    <script src="js/dash.js"></script>
     <script src="js/hide.js"></script>
+    <script src="js/dash.js"></script>
+
     <script src="js/index.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.18/dist/css/uikit.min.css" />
     <link rel="stylesheet" href="css/style.css">
 
 </head>
 
-<body onload="hide.search();" onloadeddata="getinfo.list()" style="text-align:center;" class="container">
+<body onload="hide.search();" style="text-align:center;" class="container">
 
     <div style="text-align: center;">
         <nav class="z-depth-0">
@@ -216,7 +217,12 @@ width: 100%; " class="  uk-search-input uk-animation-fade" type="number" placeho
 
 
         </div>
+
+        <script src="js/hide.js"></script>
         <script src="js/dash.js"></script>
+
+
+        <script src="js/index.js"></script>
         <script type="text/javascript">
             navigator.geolocation.getCurrentPosition(function(position) {
                 var mymap = L.map('mapid', {

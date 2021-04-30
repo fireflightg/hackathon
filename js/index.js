@@ -10,7 +10,7 @@ firebase.auth().onAuthStateChanged(function(user) {
         firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).then(snap => {
             console.log("go time");
         });
-        firebase.auth().signOut()
+
 
         login.start();
     }
@@ -199,7 +199,7 @@ var login = {
             deleteAllCookies();
             firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
                 .then(snap => {
-                    window.location.reload();
+                    window.location = "index.html"
                 });
             console.log('Signed Out');
 
