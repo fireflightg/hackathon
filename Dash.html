@@ -66,7 +66,7 @@
 
 </head>
 
-<body onload="hide.search();" style="text-align:center;" class="container">
+<body onload="hide.search();" >
 
     <div style="text-align: center;">
         <nav class="z-depth-0">
@@ -224,19 +224,31 @@ width: 100%; " class="  uk-search-input uk-animation-fade" type="number" placeho
 
         <script src="js/index.js"></script>
         <script type="text/javascript">
-            navigator.geolocation.getCurrentPosition(function(position) {
+        var id, target, option;
+                var long, lat
+                if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition)
+
+                }
+               else {
+            console.log("Geolocation is not supported by this browser.");
+            
+          }
+                
+                    function showPosition(position) {
+            console.log(position.coords.longitude);
+            console.log(position.coords.latitude);
                 var mymap = L.map('mapid', {
                     zoomControl: false,
-                    minZoom: 16
-                }).setView([position.coords.longitude, position.coords.latitude], 0);
+                    minZoom: 1
+                }).setView([position.coords.latitude, position.coords.longitude], 10);
 
-                L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}@2x.png', {
+                L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
                     //attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
                 }).addTo(mymap);
 
                 var mae = L.marker([position.coords.latitude, position.coords.longitude]).addTo(mymap);
-                var id, target, option;
-                var long, lat
+                
                 var print = document.getElementById('print');
                 console.log(position.coords.longitude);
                 lat = position.coords.latitude;
@@ -244,11 +256,11 @@ width: 100%; " class="  uk-search-input uk-animation-fade" type="number" placeho
                 console.log(position.coords.latitude);
                 mae.setLatLng([position.coords.latitude, position.coords.longitude]);
                 print.innerText = "longitude: " + position.coords.longitude + "latitude: " + position.coords.latitude;
-            });
+         
 
             function success(pos) {
                 var crd = pos.coords;
-                var latlng = [crd.latitude, crd.longitude]
+                var latlng = [crd.latitude, crd.longitude];
                 navigator.geolocation.getCurrentPosition(function(position) {
                     var print = document.getElementById('print');
                     console.log(crd.longitude);
@@ -276,31 +288,35 @@ width: 100%; " class="  uk-search-input uk-animation-fade" type="number" placeho
             };
 
             id = navigator.geolocation.watchPosition(success, error, options);
-            setTimeout(myFunction, 5000);
+        
+        }
+           // setTimeout(myFunction, 5000);
+            
+            
+            
+            //function myFunction() {
+               // mymap.panTo([position.coords.latitude, position.coords.longitude]);
+               // ref = firebase.database().ref().child('locations');
+               // ref.once("value", snap => {
+             //       snap.forEach(r => {
 
-            function myFunction() {
-                mymap.panTo([position.coords.latitude, position.coords.longitude]);
-                ref = firebase.database().ref().child('locations');
-                ref.once("value", snap => {
-                    snap.forEach(r => {
-
-                        console.log(r.val().log);
-
-                        var circle = L.circle([r.val().lat, r.val().long], {
-                            color: 'red',
-                            fillColor: '#f03',
-                            fillOpacity: 0.5,
-                            radius: 500
-                        }).addTo(mymap);
-                    });
-                });
+             //           console.log(r.val().log);
+//
+             //           var circle = L.circle([r.val().lat, r.val().long], {
+                   //         color: 'red',
+           //                 fillColor: '#f03',
+                //            fillOpacity: 0.5,
+               //             radius: 500
+           //             }).addTo(mymap);
+            //        });
+           //     });
 
 
 
 
 
 
-            }
+         //   }
 
             function showError(error) {
                 switch (error.code) {

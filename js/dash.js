@@ -13,7 +13,7 @@ firebase.auth().onAuthStateChanged(function(user) {
         welcome.innerHTML = "Welcome Back " + user.displayName;
 
         var title = document.getElementById('title');
-        title.innerText = user.displayName + " Dashboard";
+        title.innerText = user.displayName + "'s Dashboard";
         // User is signed in.
         hide.search();
         setTimeout(lis(), 3000);
