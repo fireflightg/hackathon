@@ -230,7 +230,7 @@ width: 100%; " class="  uk-search-input uk-animation-fade" type="number" placeho
                     minZoom: 16
                 }).setView([position.coords.longitude, position.coords.latitude], 0);
 
-                L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=BEng0MJJ8C2R55bDMS0O', {
+                L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}@2x.png', {
                     //attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
                 }).addTo(mymap);
 
