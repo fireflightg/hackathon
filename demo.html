@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset=utf-8 />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Leaflet Store Locator</title>
+  <!--To do - ad opengraph metadata-->
+  <!--Fonts-->
+  <link href='https://fonts.googleapis.com/css?family=Londrina+Solid|Oswald:700|Archivo+Narrow|Source+Sans+Pro:400,600,700,900' rel='stylesheet' type='text/css'>
+  <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/css/font-awesome.min.css' rel='stylesheet' />
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <!--Google Maps API NO Key!! -->
+  <!--script src="https://maps.google.com/maps/api/js?v=3"></script-->
+  <!--Leaflet 1.0.3-->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+  <!--Leaflet Plugins-->
+  <link rel="stylesheet" type="text/css" href="assets/L.VisualClick.css" />
+  <script src="assets/L.VisualClick.js"></script>
+  <!--script src='https://unpkg.com/leaflet.gridlayer.googlemutant@latest/Leaflet.GoogleMutant.js'></script-->
+  <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+  <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-hash/v0.2.1/leaflet-hash.js'></script>
+  <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
+  <!--script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/2.6.2/leaflet-routing-machine.min.js"></script-->
+  <style>
+    body {
+      color: #404040;
+      font-family: 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    * {
+      font-family: 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin: 0;
+      font-weight: 400;
+      font-family: 'Londrina Solid', cursive;
+    }
+
+    a {
+      /*color:#404040;*/
+      color: #b74042;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #101010;
+    }
+
+    .sidebar {
+      position: absolute;
+      width: 33.3333%;
+      min-width: 200px;
+      max-width: 400px;
+      height: 100%;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      border-right: 1px solid rgba(0, 0, 0, 0.25);
+    }
+
+    .pad2 {
+      padding: 20px;
+    }
+
+    .quiet {
+      color: #888;
+    }
+
+    .map {
+      position: absolute;
+      left: 33.3333%;
+      /*width: 66.6666%;*/
+      top: 0;
+      bottom: 0;
+    }
+
+    .heading {
+      background: #fff;
+      border-bottom: 1px solid #eee;
+      height: auto;
+      /*      line-height:60px;*/
+      padding: 10px;
+    }
+
+    #listingDiv {
+      overflow: auto;
+      float: left;
+    }
+
+    .listings {
+      height: 100%;
+      overflow: auto;
+      padding-bottom: 60px;
+    }
+
+    .listings .item {
+      display: block;
+      border-bottom: 1px solid #eee;
+      padding: 10px;
+      text-decoration: none;
+    }
+
+    .listings .item:last-child {
+      border-bottom: none;
+    }
+
+    .listings .item .title {
+      display: block;
+      /*      color:#00853e;*/
+      color: #000;
+      font-weight: 700;
+    }
+
+    .listings .item .title small {
+      font-weight: 400;
+    }
+
+    .listings .item.active .title,
+    .listings .item .title:hover {
+      color: #b74042;
+    }
+    /*#8cc63f*/
+
+    .listings .item.active {
+      background-color: #f8f8f8;
+    }
+
+    #storeinfo {
+      padding: 10px 10px 20px 10px;
+      display: none;
+      background-color: gainsboro;
+    }
+
+     ::-webkit-scrollbar {
+      width: 3px;
+      height: 3px;
+      border-left: 0;
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+     ::-webkit-scrollbar-track {
+      background: none;
+    }
+
+     ::-webkit-scrollbar-thumb {
+      background: #00853e;
+      border-radius: 0;
+    }
+
+    .clearfix {
+      display: block;
+    }
+
+    .clearfix:after {
+      content: '.';
+      display: block;
+      height: 0;
+      clear: both;
+      visibility: hidden;
+    }
+
+    .leaflet-container .leaflet-marker-icon {
+      cursor: pointer;
+    }
+
+    #searchbox {
+      width: 100%;
+      height: 36px;
+    }
+
+    #search-input {
+      font-size: 18px;
+      width: 100%;
+      margin-top: 5px;
+      box-shadow: 0 1px lightgray;
+      border: none;
+    }
+
+    #closeButton {
+      float: right;
+    }
+
+    #closeButton:hover,
+     :focus {
+      color: #b74042;
+      cursor: pointer;
+      /*padding: 5px;*/
+    }
+
+    #searchIcon:hover,
+     :focus {
+      color: #b74042;
+      cursor: pointer;
+    }
+
+    #infoClose {
+      float: right;
+    }
+
+    #searchIcon {
+      float: right;
+      font-size: 26px;
+      margin-top: 1px;
+    }
+
+    @media screen and (min-width:601px) and (max-width: 1199px) {
+      .map {
+        width: 66.6666%;
+      }
+    }
+
+    @media screen and (max-width:600px) {
+      .map {
+        margin-left: 200px;
+        right: 0;
+        left: 0;
+      }
+    }
+
+    @media screen and (min-width: 1200px) {
+      .map {
+        left: 400px;
+        right: 0;
+      }
+    }
+
+    @media screen and (max-width:968px) {
+      h1 {
+        font-size: 1.2em;
+      }
+      #searchIcon {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class='sidebar'>
+      <div class='heading'>
+        <h1>Leaflet Store Locator<span id="searchIcon"><i class="fa fa-search"></i></span></h1>
+        <div id="searchbox" style="display:none;">
+          <input type="text" id="search-input" autofocus/>
+        </div>
+      </div>
+      <div id="storeinfo"><i id="infoClose" class="fa fa-times fa-2x"></i>
+        <div id="infoDivInner"></div>
+      </div>
+      <div id='listingDiv' class='listings'></div>
+    </div>
+    <div id='map' class='map'>
+      <!--Sidebar plugin no longer used ---->
+      <!--div id="sidebar">
+        <h1>Store Information and Products</h1>
+      </div-->
+    </div>
+  </div>
+  <script>
+    //basic map setup map and basemap
+    var map = L.map('map')
+      .setView([40.410976, -82.928835], 8);
+
+    //L.hash(map);
+    var cartodbLight = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+      subdomains: 'abcd'
+    }).addTo(map);
+//     var googleStreets = L.gridLayer.googleMutant({
+//       type: 'roadmap' // valid values are 'roadmap', 'satellite', 'terrain' and 'hybrid'
+//     }).addTo(map);
+
+    //layer control
+    var baselayers = {
+//       "Google Street" : googleStreets,
+      "Grayscale"     : cartodbLight
+    };
+    
+    var layerControl = new L.control.layers(baselayers, null).addTo(map);
+      
+    //end basic map
+
+    //show search on search icon click
+    //global variables - could add more here
+    var locationLat = [];
+    var locationLng = [];
+    var locMarker;
+    var infoDiv = document.getElementById('storeinfo');
+    var infoDivInner = document.getElementById('infoDivInner');
+    var toggleSearch = document.getElementById('searchIcon');
+    var hasCircle = 0;
+    var circle = [];
+    //close store infor when x is clicked
+    var userLocation;
+    $("#infoClose").click(function() {
+      $("#storeinfo").hide();
+      if (map.hasLayer(circle)) {
+        map.removeLayer(circle);
+      }
+    });
+    var listings = document.getElementById('listingDiv');
+    var stores = L.geoJson().addTo(map);
+    var storesData = omnivore.csv('stores.csv');
+    
+    function setActive(el) {
+      var siblings = listings.getElementsByTagName('div');
+      for (var i = 0; i < siblings.length; i++) {
+        siblings[i].className = siblings[i].className
+          .replace(/active/, '').replace(/\s\s*$/, '');
+      }
+      el.className += ' active';
+    }
+    
+    function sortGeojson(a,b,prop) {
+      return (a.properties.name.toUpperCase() < b.properties.name.toUpperCase()) ? -1 : ((a.properties.name.toUpperCase() > b.properties.name.toUpperCase()) ? 1 : 0);
+    }
+    
+    storesData.on('ready', function() {
+
+      var storesSorted = storesData.toGeoJSON();
+      //console.log(storesSorted);
+      var sorted = (storesSorted.features).sort(sortGeojson)
+      //console.log(sorted);
+      storesSorted.features = sorted;
+      //console.log(storesSorted)
+      stores.addData(storesSorted);
+      
+      map.fitBounds(stores.getBounds());
+      toggleSearch.onclick = function() {
+        var s = document.getElementById('searchbox');
+        if (s.style.display != 'none') {
+          s.style.display = 'none';
+          toggleSearch.innerHTML = '<i class="fa fa-search"></i>';
+          $("#search-input").val("");
+
+          //search.collapse();
+          document.getElementById('storeinfo').style.display = 'none';
+          $('.item').show();
+        } else {
+          toggleSearch.innerHTML = '<i class="fa fa-times"></i>';
+          s.style.display = 'block';
+
+          //attempt to autofocus search input field when opened
+          $('#search-input').focus();
+        }
+      };
+      stores.eachLayer(function(layer) {
+
+        //New jquery search
+        $('#searchbox').on('change paste keyup', function() {
+          var txt = $('#search-input').val();
+          $('.item').each(function() {
+            if ($(this).text().toUpperCase().indexOf(txt.toUpperCase()) != -1) {
+              $(this).show();
+            } else {
+              $(this).hide();
+            }
+          });
+        });
+
+        // Shorten layer.feature.properties to just `prop` so we're not
+        // writing this long form over and over again.
+        var prop = layer.feature.properties;
+        var layerx = layer.getLatLng().lat;
+        var layery = layer.getLatLng().lng;
+
+        ////console.log(locationLat);
+        // Each marker on the map.
+        var popup = '<h2 style="margin-bottom:5px;">' + prop.name + '</h2><small class="quiet">' + prop.products +
+          '</small><br /><span id="directions"><a href="https://www.google.com/maps/dir//?saddr=My+Location' + '&daddr=' + layerx + ',' + layery + '" target="_blank">Directions</a></span>';
+        var listing = listings.appendChild(document.createElement('div'));
+        listing.className = 'item';
+        var link = listing.appendChild(document.createElement('a'));
+        link.href = '#';
+        link.className = 'title';
+        link.innerHTML = prop.name;
+        if (prop.products) {
+          link.innerHTML += '<br /><small class="quiet">' + prop.products + '</small>';
+        }
+        var details = listing.appendChild(document.createElement('div'));
+        details.innerHTML = prop.address;
+        var linkClick = 0;
+        link.onclick = function() {
+          linkClick = 1;
+          setActive(listing);
+
+          //console.log(locationLat);
+          // When a menu item is clicked, animate the map to center
+          // its associated layer and open its popup.
+          map.setView(layer.getLatLng(), 16);
+          layer.fire('click');
+          infoDiv.style.display = 'block';
+
+          //layer.openPopup();
+          //		    sidebar.setContent(popup);
+          //		    sidebar.show();
+          return false;
+        };
+        // Marker interaction
+        layer.on('click', function(e) {
+          if (map.hasLayer(userLocation)) {
+            map.removeLayer(userLocation)
+          }
+          //console.log(e.latlng);
+          if (linkClick != 1) {
+            map.setView([e.latlng.lat, e.latlng.lng], 16);
+          }
+          linkClick = 0;
+          $(".item").show();
+          $("#searchbox").hide();
+          toggleSearch.innerHTML = '<i class="fa fa-search"></i>';
+          if (map.hasLayer(circle)) {
+            map.removeLayer(circle);
+            hasCircle = 0;
+          }
+          // 1. center the map on the selected marker.
+          //map.setView(layer.getLatLng(), map.getZoom());
+          // use this forr polygons and lines - map.panTo(layer.getBounds().getCenter());
+          // 2. Set active the markers associated listing.
+          setActive(listing);
+          // sidebar.setContent(popup);
+          infoDiv.style.display = "block";
+          infoDivInner.innerHTML = popup;
+          // sidebar.show();
+          xy = layer.getLatLng();
+          setTimeout(function() {
+            circle = new L.circleMarker(xy, {
+              color: 'red',
+              fillColor: '#f03',
+              fillOpacity: 0.5,
+              radius: 50,
+            }).addTo(map);
+          }, 200);
+        });
+        //popup += '</div>';
+        //layer.bindPopup(popup);
+        layer.setIcon(L.icon({
+          iconUrl: 'assets/icons/sbark-icon.png',
+          iconSize: [50, 50],
+          iconAnchor: [40, 50],
+          popupAnchor: [-14, -47]
+        }));
+      }); //end eachLayer
+      
+    map.locate({
+      setView: true,
+      maxZoom: 10
+    });
+    
+    map.on('locationfound', function(e) {
+      console.log(e);
+      //8046.72 meters = 5 miles
+      var radius = 80000;
+//       var rmiles = (radius/1609.34).toFixed(0); 
+      var range = 10;
+      userLocation = new L.Circle(e.latlng, radius, {
+        color: 'cadetblue',
+        fillColor: 'cadetblue',
+        fillOpacity: 0.2,
+        radius: 30
+      });
+      var point = turf.point([e.longitude,e.latitude]);
+      
+      var storesWithin = storesSorted.features.map(function(store) {
+        var newpoint = turf.feature(store.geometry);
+        console.log(turf.distance(newpoint, point, {units: 'miles'}));
+        if (turf.distance(newpoint, point, {units: 'miles'}) <= range) {
+          return store
+        }
+      });
+      console.log(storesWithin);
+      
+//       var within = turf.featureCollection(stores.eachLayer(function(store) {
+//         console.log(store);
+//         var newpoint = turf.feature(store.feature.geometry);
+//         console.log(turf.distance(newpoint, point, {units: 'miles'}));
+//         if (turf.distance(newpoint, point, {units: 'miles'}) <= range) return true;
+//       }));
+//       console.log(within);
+//       var size = Object.keys(within.features._layers).length;
+//       console.log(size);
+      var nearest = turf.nearest(point, stores.toGeoJSON());
+      console.log(nearest);
+      if (nearest.properties.name) {
+        $("#infoDivInner").html("Location found!<br>Your nearest store is " + "<strong>" + nearest.properties.name + "</strong>");
+        circle = new L.circleMarker([nearest.geometry.coordinates[1],nearest.geometry.coordinates[0]], {
+          color: 'red',
+          fillColor: '#f03',
+          fillOpacity: 0.5,
+          radius: 50,
+        }).addTo(map);
+        console.log(circle);
+        hasCircle = 1;
+      }
+      $("#storeinfo").show();
+    })
+    }); //end on ready function
+    //setTimeout(function() {        
+        
+    //sidebar.hide();
+    //}, 500);
+    map.on('click', function() {
+      if (map.hasLayer(userLocation)) {
+        map.removeLayer(userLocation)
+      }
+      if (map.hasLayer(circle)) {
+        ////console.log('circle');
+        map.removeLayer(circle);
+        hasCircle = 0;
+      }
+    });
+  </script>
+</body>
+
+</html>

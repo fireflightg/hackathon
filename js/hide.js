@@ -1,7 +1,7 @@
 var hide = {
 
     search: function() {
-        var searchfield = document.getElementById('sea');
+        var searchfield = document.getElementById('search-input');
         var searchbutton = document.getElementById('search');
         var logo = document.getElementById('logo');
         var ham = document.getElementById('ham');
@@ -13,9 +13,10 @@ var hide = {
     },
     whilesearch: function() {
         var searchbutton = document.getElementById('search');
-        var searchfield = document.getElementById('sea');
+        var searchfield = document.getElementById('search-input');
         var logo = document.getElementById('logo');
         var ham = document.getElementById('ham');
+        var navBackButton = document.getElementById('backbutton')
 
         searchfield.style.display = 'block';
         searchbutton.style.display = 'none';

@@ -2,7 +2,19 @@ firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
 
         var welcome = document.getElementById('welcome');
-        welcome.innerText = "Welcome Back " + user.displayName;
+        if(user.displayName){
+            console.log(user.displayName);
+        welcome.innerHTML = "Welcome Back " + user.displayName;
+        }
+        else{
+        var databasename = firebase.database().ref().child(user.uid).child("name");
+
+        databasename.on('value',snap=>{
+            console.log(snap.val())
+            welcome.innerHTML = "Welcome Back " + snap.val();
+        });
+        
+        }
         login.signed();
 
         // User is signed in.
