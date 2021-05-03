@@ -1,4 +1,4 @@
 FID,name,address,chips,crackers,blackbeanc,blackbeans,speltpasta,tortillas,adzuki beans,pintobeans,popcorn,milledprod,products,latitude,longitude,addrtype,addrlocat,index
 0,Kroger,"7625 Sawmill Rd, Dublin, OH 43016",1,1,0,1,1,0,1,1,1,0,"Large supermarket chain with deli & bakery departments, plus health & beauty aids.",40.12280195205961,-83.09286620561605,street_address,RANGE_INTERPOLATED,"Kroger Athens|Chips, Crackers, Black Beans, Pinto Beans, Adzuki Beans, Popcorn"
-0,Kroger,"7625 Sawmill Rd, Dublin, OH 43016",1,1,0,1,1,0,1,1,1,0,"Large supermarket chain with deli & bakery departments, plus health & beauty aids.",40.20789686772233, -83.02905013468424,street_address,RANGE_INTERPOLATED,"Kroger Athens|Chips, Crackers, Black Beans, Pinto Beans, Adzuki Beans, Popcorn"
+0,Kroger1,"6417 Columbus Pike, Lewis Center, OH 43035",1,1,0,1,1,0,1,1,1,0,"Large supermarket chain with deli & bakery departments, plus health & beauty aids.",40.20789686772233, -83.02905013468424,street_address,RANGE_INTERPOLATED,"Kroger Athens|Chips, Crackers, Black Beans, Pinto Beans, Adzuki Beans, Popcorn"
 

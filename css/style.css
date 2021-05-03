@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato&family=Montserrat&display=swap');
 html {
+    
     overflow-x: hidden;
     color: black;
 }
+
 
 body {
     background-color: white;
@@ -55,6 +57,9 @@ li {
 
 #mapc {
     padding: 50%;
+}
+h2{
+    color: black;
 }
 
 
@@ -688,4 +693,17 @@ input:focus {
 
 .pbutton:focus {
     opacity: .2;
+}
+#finditem:disabled{
+opacity: .5 !important;
+color: brown !important;
+}
+#egq74c9vg88c1{
+    text-align: center;
+    width: 50%;
+    height: 50%;
+}
+#indoormap{
+    width: 100%;
+    height: 100%;
 }
