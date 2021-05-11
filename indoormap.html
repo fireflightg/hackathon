@@ -65,6 +65,7 @@
 
     <script src="js/index.js"></script>
     <script src="js/indoormap.js"></script>
+    <script src="js/location.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.18/dist/css/uikit.min.css" />
     <link rel="stylesheet" href="css/style.css">
 
@@ -128,8 +129,31 @@ width: 100%; " class="  uk-search-input uk-animation-fade " type="search" placeh
 
         <li><a onclick="login.logout()" class="waves-effect" href="#">Log Out</a></li>
     </ul>
-    <canvas id="myCanvas"></canvas>
+
+    <h1 id="print">bruh</h1>
+    <canvas width="100%" height="100%" id="myCanvas"></canvas>
+
     <script src="js/indoormap.js"></script>
+    <script>
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition)
+
+        }
+
+        function showPosition(position) {
+            var c = document.getElementById("myCanvas");
+            var ctx = c.getContext("2d");
+            ctx.beginPath();
+            ctx.arc(layerx, layery, 10, 0, Math.PI * 2, true);
+            ctx.closePath();
+            ctx.fill();
+            console.log(position.coords.latitude, position.coords.longitude);
+            var prop = layer.feature.properties;
+            var layerx = layer.getLatLng().lat;
+            var layery = layer.getLatLng().lng;
+            console.log(layerx);
+        }
+    </script>
 </body>
 <!-- </div> -->
 
