@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Indoor Map Example</title>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+ 
+
+
+
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+            apiKey: "AIzaSyAGsfdkjppVjAnFoP2lk8PLaiwbKdnSg08",
+            authDomain: "shopp-8ef5d.firebaseapp.com",
+            databaseURL: "https://shopp-8ef5d-default-rtdb.firebaseio.com",
+            projectId: "shopp-8ef5d",
+            storageBucket: "shopp-8ef5d.appspot.com",
+            messagingSenderId: "1056813294814",
+            appId: "1:1056813294814:web:f60458b13a529cff750e4f",
+            measurementId: "G-WEJRNFBKD4"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
+
+
+    <!-- UIkit CSS -->
+    <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.18/dist/css/uikit.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+    <!-- UIkit JS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.18/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.18/dist/js/uikit-icons.min.js"></script>
+
+
+    <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/leaflet-indoor.js"></script>
+
+    <title id="title">Dashboard</title>
+    <script src="js/hide.js"></script>
+
+    <script src="js/dash.js"></script>
+
+    <script src="js/index.js"></script>
+    <script src="js/indoormap.js"></script>
+    <script src="js/location.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.18/dist/css/uikit.min.css" />
+    <link rel="stylesheet" href="css/leaflet.css" />
+  <style>
+      
+body {
+    background-color: white;
+    overflow-x: hidden;
+}
+
+@media screen and (max-width:100%) {
+    #body {
+        display: block;
+    }
+}
+
+.nav-wrapper,
+nav,
+.brand-logo {
+    background-color: white;
+}
+
+.sidenav {
+    background-color: #ffddd2;
+}
+
+#ham,
+#logo,
+#search {
+    color: black;
+    text-decoration: none;
+}
+
+#align {
+    text-align: center;
+}
+
+#mapid {
+     margin: 0 auto;  
+    height: 5vh;
+    width: 40vw;
+   
+}
+
+#welcome,
+h1 {
+    text-align: center;
+    font-family: 'Bebas Neue';
+}
+
+li {
+    font-family: 'Montserrat';
+}
+
+#mapc {
+    padding: 50%;
+}
+h2{
+    color: black;
+}
+
+  </style>
+
+    <!--[if lte IE 8]><link rel="stylesheet" href="libs/leaflet.ie.css" /><![endif]-->
+
+    <style type="text/css">
+        body {
+          padding: 0;
+          margin: 0;
+        }
+
+        html, body, #map {
+          height: 100%;
+        }
+
+        .info {
+            width: 150px;
+            padding: 6px 8px;
+            font: 14px/16px Arial, Helvetica, sans-serif;
+            background: white;
+            background: rgba(255,255,255,1);
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="z-depth-0  ">
+        <div class="nav-wrapper z-depth-0">
+            <a href="Dash.html" id="logo" class="brand-logo center uk-animation-fade item" style="text-align: center;">Ge0tagger</a>
+
+            <a id="ham" href="#" data-target="mobile-links" class="sidenav-trigger uk-animation-fade item  "><i class="material-icons">menu</i></a>
+            <ul id="nav-mobile" class="right ">
+
+                <li><a id="search" href="#" uk-toggle><i class="material-icons uk-animation-fade item" onclick="hide.whilesearch()" >search</i></a></li>
+
+            </ul>
+            <div style="display:none" id="nav-set" class=" brand-logo center uk-search uk-search-medium searchbox">
+                <input id="sea" style="padding: 1% 6%;
+        box-sizing: border-box;
+       -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+       border:1px solid #BEBEBE;
+       -webkit-transition: all 0.30s ease-in-out;
+       -moz-transition: all 0.30s ease-in-out;
+       -ms-transition: all 0.30s ease-in-out;
+       -o-transition: all 0.30s ease-in-out;
+       outline: none;  
+       height: 33px; -moz-box-shadow: 0 0 8px #000000;
+-webkit-box-shadow: 0 0 8px #ffffff;
+box-shadow: 0 0 8px rgba(0, 0, 0, 0);
+border: 1px solid rgba(0, 0, 0, 0);
+color: #000000;
+font-family: 'Montserrat';
+margin-right: 50%; 
+border-radius: 10px;
+text-align: center;
+padding-top: 3vw;
+width: 100%; " class="  uk-search-input uk-animation-fade " type="search" placeholder="Search">
+            </div>
+        </div>
+    </nav>
+
+
+    <ul id="mobile-links" class="sidenav ">
+        <li>
+            <div class="user-view">
+                <div class="background">
+
+                </div>
+                <a href="#user"><img class="circle" src="images/yuna.jpg"></a>
+                <a href="#name"><span id="infoname" class="white-text name"></span></a>
+                <a href="#email"><span id="infoemail" class="white-text email"></span></a>
+            </div>
+        </li>
+        <li><a href="Problem.html">Search Problems</a></li>
+        <li><a href="Setting.html">Settings</a></li>
+
+        <li><a onclick="login.logout()" class="waves-effect" href="#">Log Out</a></li>
+    </ul>
+    <div id="map"></div>
+    
+
+    <script src="jquery.min.js"></script>
+    <script src="leaflet-src.js"></script>
+    <script src="leaflet-indoor.js"></script>
+    <link rel="stylesheet" href="https://ppete2.github.io/Leaflet.PolylineMeasure/Leaflet.PolylineMeasure.css" />
+    <script src="https://ppete2.github.io/Leaflet.PolylineMeasure/Leaflet.PolylineMeasure.js"></script>
+    <script src="https://npmcdn.com/leaflet-geometryutil"></script>
+    <script type="text/JavaScript">
+    
+    var id, target, option;
+                var long, lat
+                if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition)
+
+                }
+                function showPosition(position) {  
+        // Create the map
+        var osmUrl = 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png',
+            osm = new L.TileLayer(osmUrl, {minZoom:19,
+                maxZoom: 22,
+               
+            });
+
+        var map = new L.Map('map', {
+            layers: [osm],
+            center: new L.LatLng(40.12162214881899, -83.09240016038316),
+            zoom: 22,
+    
+    dragging: false,
+    scrollWheelZoom: "center",
+        });
+       console.log(position.coords);
+      var mae  = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
+      mae.setIcon(L.icon({
+          iconUrl: 'icons/map-icon.svg',
+          iconSize: [150, 150],
+          iconAnchor: [15, 15],
+          popupAnchor: [0, 0]
+        }));
+       
+      
+        // This example uses a GeoJSON FeatureCollection saved to a file
+        // (data.json), see the other example (live/index.html) for details on
+        // fetching data using the OverpassAPI (this is also how the data in
+        // data.json was generated)
+        
+        $.getJSON("data.json", function(geoJSON) {
+            var pointA = new L.LatLng(40.1215,-83.09211561605);
+var pointB = new L.LatLng(40.1215, -83.09255);
+var pointList = [pointA, pointB];
+        var polyline = L.polyline(pointList).addTo(map);
+            var indoorLayer = new L.Indoor(geoJSON, {
+                getLevel: function(feature) { 
+                    if (feature.properties.relations.length === 0)
+                        return null;
+
+                    return feature.properties.relations[0].reltags.level;
+                },
+                onEachFeature: function(feature, layer) {
+                    layer.bindPopup(JSON.stringify(feature.properties, null, 4));
+                },
+                style: function(feature) {
+                    var fill = 'white';
+
+                    if (feature.properties.tags.buildingpart === 'corridor') {
+                        fill = '#169EC6';
+                    } else if (feature.properties.tags.buildingpart === 'verticalpassage') {
+                        fill = '#0A485B';
+                    }
+
+                    return {
+                        fillColor: fill,
+                        weight: 1,
+                        color: '#666',
+                        fillOpacity: .5
+                    };
+                }
+            });
+
+            indoorLayer.setLevel("0");
+
+            indoorLayer.addTo(map);
+
+            var levelControl = new L.Control.Level({
+                level: "0",
+                levels: indoorLayer.getLevels()
+            });
+
+            // Connect the level control to the indoor layer
+            levelControl.addEventListener("levelchange", indoorLayer.setLevel, indoorLayer);
+ 
+           
+    
+            levelControl.addTo(map);
+        });
+
+        var legend = L.control({position: 'topright'});
+
+        legend.onAdd = function(map) {
+            var d = "View your items in the store"
+
+            var div = L.DomUtil.create('div', 'info legend');
+
+            div.appendChild(document.createTextNode(d));
+
+            
+            return div;
+        };
+
+        legend.addTo(map);
+        
+        
+        
+    }
+    
+    </script>
+</body>
+</html>

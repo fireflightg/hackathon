@@ -17,6 +17,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+ 
 
 
 
@@ -57,6 +58,7 @@
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/leaflet-indoor.js"></script>
 
     <title id="title">Dashboard</title>
     <script src="js/hide.js"></script>
@@ -131,28 +133,121 @@ width: 100%; " class="  uk-search-input uk-animation-fade " type="search" placeh
     </ul>
 
     <h1 id="print">bruh</h1>
-    <canvas width="100%" height="100%" id="myCanvas"></canvas>
+    <div class="container">
+
+        <table id="table1">
+            <tr class="ssa">
+                <th class="ssa">Item</th>
+                <th class="ssa">Amount</th>
+                <th class="ssa">Delete</th>
+
+            </tr>
+        </table>
+
+
+    </div>
+    <li id="mapc" class="uk-card uk-card-default uk-card-body uk-width-1-1@m">
+                        
+        <div onload="" id="mapid" uk-cover></div>
+        
+    </li>
+
+ 
 
     <script src="js/indoormap.js"></script>
     <script>
-        if (navigator.geolocation) {
+      if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition)
 
+                }
+                function error(err) {
+    console.warn('ERROR(' + err.code + '): ' + err.message);
+};
+
+
+
+                function showPosition(position) {    
+         
+    //basic map setup map and basemap
+    var map = L.map('mapid')
+      .setView([position.coords.latitude, position.coords.longitude], 8);
+
+    //L.hash(map);
+    var cartodbLight = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+      subdomains: 'abcd'
+    }).addTo(map);
+    var map = L.map('mapid', {
+            layers: [cartodbLight],
+            center: new L.LatLng(49.41873, 8.67689),
+            zoom: 19
+        })
+      .setView([position.coords.latitude, position.coords.longitude], 8);
+   
+    $.getJSON("data.json", function(geoJSON) {
+
+var indoorLayer = new L.Indoor(geoJSON, {
+    getLevel: function(feature) { 
+        if (feature.properties.relations.length === 0)
+            return null;
+
+        return feature.properties.relations[0].reltags.level;
+    },
+    onEachFeature: function(feature, layer) {
+        layer.bindPopup(JSON.stringify(feature.properties, null, 4));
+    },
+    style: function(feature) {
+        var fill = 'white';
+
+        if (feature.properties.tags.buildingpart === 'corridor') {
+            fill = '#169EC6';
+        } else if (feature.properties.tags.buildingpart === 'verticalpassage') {
+            fill = '#0A485B';
         }
 
-        function showPosition(position) {
-            var c = document.getElementById("myCanvas");
-            var ctx = c.getContext("2d");
-            ctx.beginPath();
-            ctx.arc(layerx, layery, 10, 0, Math.PI * 2, true);
-            ctx.closePath();
-            ctx.fill();
-            console.log(position.coords.latitude, position.coords.longitude);
-            var prop = layer.feature.properties;
-            var layerx = layer.getLatLng().lat;
-            var layery = layer.getLatLng().lng;
-            console.log(layerx);
-        }
+        return {
+            fillColor: fill,
+            weight: 1,
+            color: '#666',
+            fillOpacity: 1
+        };
+    }
+});
+
+indoorLayer.setLevel("0");
+
+indoorLayer.addTo(map);
+
+var levelControl = new L.Control.Level({
+    level: "0",
+    levels: indoorLayer.getLevels()
+});
+
+// Connect the level control to the indoor layer
+levelControl.addEventListener("levelchange", indoorLayer.setLevel, indoorLayer);
+
+levelControl.addTo(map);
+});
+
+var legend = L.control({position: 'topright'});
+
+legend.onAdd = function(map) {
+var d = "This Leaflet plugin makes it easier to create indoor " +
+        "maps. This example pulls in the data for a particular " +
+        "building, and then displays it on the map, you can " +
+        "change the level displayed by using the selector at " +
+        "the bottom right of the map."
+
+var div = L.DomUtil.create('div', 'info legend');
+
+div.appendChild(document.createTextNode(d));
+
+return div;
+};
+
+legend.addTo(map);
+}
+
     </script>
 </body>
 <!-- </div> -->

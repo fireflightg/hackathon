@@ -1,0 +1,482 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "stroke": "#555555",
+          "stroke-width": 2,
+          "stroke-opacity": 1,
+          "fill": "#f7b9ff",
+          "fill-opacity": 0.5,
+          "height": 3,
+          "level": 0,
+          "level:usage": "academic",
+          "type": "level",
+          "name": "Erdgeschoss"
+        },
+        "relations": [],
+                "meta": {},
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -83.09254199266434,
+                40.12117128721337
+              ],
+              [
+                -83.09225767850874,
+                40.12117128721337
+              ],
+              [
+                -83.09225767850874,
+                40.121366135786104
+              ],
+              [
+                -83.09254199266434,
+                40.121366135786104
+              ],
+              [
+                -83.09254199266434,
+                40.12117128721337
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "stroke": "#555555",
+          "stroke-width": 2,
+          "stroke-opacity": 1,
+          "fill": "#939bff",
+          "fill-opacity": 0.5,
+          "id": "entrance",
+          "height": 3,
+          "level": 0,
+          "level:usage": "academic",
+          "type": "level",
+          "name": "Erdgeschoss"
+        },
+        "relations": [],
+                "meta": {},
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -83.09228718280792,
+                40.12141536060032
+              ],
+              [
+                -83.09217184782028,
+                40.12141536060032
+              ],
+              [
+                -83.09217184782028,
+                40.12160610641883
+              ],
+              [
+                -83.09228718280792,
+                40.12160610641883
+              ],
+              [
+                -83.09228718280792,
+                40.12141536060032
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "stroke": "#555555",
+          "stroke-width": 2,
+          "stroke-opacity": 1,
+          "fill": "#ed8074",
+          "fill-opacity": 0.5,
+          "height": 3,
+          "level": 0,
+          "level:usage": "academic",
+          "type": "level",
+          "name": "Erdgeschoss"
+        },
+        "relations": [],
+                "meta": {},
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -83.0927874147892,
+                40.1211856444957
+              ],
+              [
+                -83.09254467487335,
+                40.1211856444957
+              ],
+              [
+                -83.09254467487335,
+                40.121366135786104
+              ],
+              [
+                -83.0927874147892,
+                40.121366135786104
+              ],
+              [
+                -83.0927874147892,
+                40.1211856444957
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "stroke": "#555555",
+          "stroke-width": 2,
+          "stroke-opacity": 1,
+          "fill": "#d09f6f",
+          "fill-opacity": 0.5,
+          "id": "bakery",
+          "height": 3,
+          "level": 0,
+          "level:usage": "academic",
+          "type": "level",
+          "name": "Erdgeschoss"
+        },
+        "relations": [],
+                "meta": {},
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -83.09305027127266,
+                40.12107078615231
+              ],
+              [
+                -83.09279009699821,
+                40.12107078615231
+              ],
+              [
+                -83.09279009699821,
+                40.12136818682073
+              ],
+              [
+                -83.09305027127266,
+                40.12136818682073
+              ],
+              [
+                -83.09305027127266,
+                40.12107078615231
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -83.0927874147892,
+                40.121366135786104
+              ],
+              [
+                -83.09228986501694,
+                40.121366135786104
+              ],
+              [
+                -83.09228986501694,
+                40.12160918295991
+              ],
+              [
+                -83.0927874147892,
+                40.12160918295991
+              ],
+              [
+                -83.0927874147892,
+                40.121366135786104
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "stroke": "#555555",
+          "stroke-width": 2,
+          "stroke-opacity": 1,
+          "fill": "#a9ff80",
+          "fill-opacity": 0.5,
+          "id": "fresh_produce",
+          "height": 3,
+          "level": 0,
+          "level:usage": "academic",
+          "type": "level",
+          "name": "Erdgeschoss"
+        },
+        "relations": [],
+                "meta": {},
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -83.09274986386299,
+                40.121392799231565
+              ],
+              [
+                -83.09270963072777,
+                40.121392799231565
+              ],
+              [
+                -83.09270963072777,
+                40.121550728655684
+              ],
+              [
+                -83.09274986386299,
+                40.121550728655684
+              ],
+              [
+                -83.09274986386299,
+                40.121392799231565
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "stroke": "#555555",
+          "stroke-width": 2,
+          "stroke-opacity": 1,
+          "fill": "#c4ffbb",
+          "fill-opacity": 0.5,
+          "height": 3,
+          "level": 0,
+          "level:usage": "academic",
+          "type": "level",
+          "name": "Erdgeschoss"
+        },
+        "relations": [],
+                "meta": {},
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -83.09264592826366,
+                40.12139433750694
+              ],
+              [
+                -83.09260167181492,
+                40.12139433750694
+              ],
+              [
+                -83.09260167181492,
+                40.121550728655684
+              ],
+              [
+                -83.09264592826366,
+                40.121550728655684
+              ],
+              [
+                -83.09264592826366,
+                40.12139433750694
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "stroke": "#555555",
+          "stroke-width": 2,
+          "stroke-opacity": 1,
+          "fill": "#b5ff9f",
+          "fill-opacity": 0.5,
+          "height": 3,
+          "level": 0,
+          "level:usage": "academic",
+          "type": "level",
+          "name": "Erdgeschoss"
+        },
+        "relations": [],
+                "meta": {},
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -83.09255674481392,
+                40.12139536302385
+              ],
+              [
+                -83.09251584112644,
+                40.12139536302385
+              ],
+              [
+                -83.09251584112644,
+                40.12155021589841
+              ],
+              [
+                -83.09255674481392,
+                40.12155021589841
+              ],
+              [
+                -83.09255674481392,
+                40.12139536302385
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "stroke": "#555555",
+          "stroke-width": 2,
+          "stroke-opacity": 1,
+          "fill": "#a5ff9b",
+          "fill-opacity": 0.5,
+          "id": "flowers",
+          "height": 3,
+          "level": 0,
+          "level:usage": "academic",
+          "type": "level",
+          "name": "Erdgeschoss"
+        },
+        "relations": [],
+                "meta": {},
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -83.0923743546009,
+                40.1213994650913
+              ],
+              [
+                -83.09234619140625,
+                40.1213994650913
+              ],
+              [
+                -83.09234619140625,
+                40.12154098626676
+              ],
+              [
+                -83.0923743546009,
+                40.12154098626676
+              ],
+              [
+                -83.0923743546009,
+                40.1213994650913
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "stroke": "#555555",
+          "stroke-width": 2,
+          "stroke-opacity": 1,
+          "fill": "#555555",
+          "fill-opacity": 0.5,
+          "id": "exit",
+          "height": 3,
+          "level": 0,
+          "level:usage": "academic",
+          "type": "level",
+          "name": "Erdgeschoss"
+          
+        },
+        "relations": [],
+                "meta": {},
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -83.09236764907837,
+                40.12230345216854
+              ],
+              [
+                -83.09223622083664,
+                40.12230345216854
+              ],
+              [
+                -83.09223622083664,
+                40.12240395140747
+              ],
+              [
+                -83.09236764907837,
+                40.12240395140747
+              ],
+              [
+                -83.09236764907837,
+                40.12230345216854
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "stroke": "#555555",
+          "stroke-width": 2,
+          "stroke-opacity": 1,
+          "fill": "#555555",
+          "fill-opacity": 0.5,
+          "height": 3,
+          "level": 0,
+          "level:usage": "academic",
+          "type": "level",
+          "name": "Erdgeschoss"
+        },
+        "relations": [],
+                "meta": {},
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -83.09299528598785,
+                40.121610208473555
+              ],
+              [
+                -83.09238106012344,
+                40.121610208473555
+              ],
+              [
+                -83.09238106012344,
+                40.122330115246406
+              ],
+              [
+                -83.09299528598785,
+                40.122330115246406
+              ],
+              [
+                -83.09299528598785,
+                40.121610208473555
+              ]
+            ]
+          ]
+        }
+      }
+    ]
+  }

@@ -234,7 +234,7 @@ width: 100%; " class="  uk-search-input uk-animation-fade" type="number" placeho
                     </li>
                     <li class="uk-card uk-card-default uk-card-body uk-width-1-1@m">
                         <h2 id="logo" class="brand-logo center">Find Your Items</h2>
-                        <button class="buttonstyle  " style="padding:1%; margin: 0 auto;" id="finditem" onclick="window.location = 'indoormap.html';">Let's Go</button>
+                        <button class="buttonstyle  " style="padding:1%; margin: 0 auto;" id="finditem" onclick="window.location = 'indoormapping.html';">Let's Go</button>
                     </li>
             </ul>
 
@@ -255,8 +255,8 @@ width: 100%; " class="  uk-search-input uk-animation-fade" type="number" placeho
                 }
                 function showPosition(position) {    
     //basic map setup map and basemap
-    var map = L.map('mapid')
-      .setView([position.coords.latitude, position.coords.longitude], 8);
+      var map = L.map('mapid')
+        .setView([position.coords.latitude, position.coords.longitude], 8);
 
     //L.hash(map);
     var cartodbLight = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
