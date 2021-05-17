@@ -250,7 +250,7 @@ width: 100%; " class="  uk-search-input uk-animation-fade " type="search" placeh
         // data.json was generated)
         
         $.getJSON("data.json", function(geoJSON) {
-            var pointA = new L.LatLng(40.1215,-83.09211561605);
+            var pointA = new L.LatLng(position.coords.latitude, position.coords.longitude);
 var pointB = new L.LatLng(40.1215, -83.09255);
 var pointList = [pointA, pointB];
         var polyline = L.polyline(pointList).addTo(map);
