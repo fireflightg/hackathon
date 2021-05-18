@@ -56,7 +56,7 @@ window.e = 0;
 function lis() {
     console.log(useruid);
     var uid = firebase.auth().currentUser.uid;
-    var getuser = firebase.database().ref().child('User')
+    var getuser = firebase.database().ref().child('User');
     var uided = getuser.child(useruid);
 
 

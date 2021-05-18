@@ -191,7 +191,7 @@ width: 100%; " class="  uk-search-input uk-animation-fade " type="search" placeh
                 <div class="background">
 
                 </div>
-                <a href="#user"><img class="circle" src="images/yuna.jpg"></a>
+                <a href="#user"><img class="circle" src="images/yuna.png"></a>
                 <a href="#name"><span id="infoname" class="white-text name"></span></a>
                 <a href="#email"><span id="infoemail" class="white-text email"></span></a>
             </div>
@@ -210,8 +210,10 @@ width: 100%; " class="  uk-search-input uk-animation-fade " type="search" placeh
     <link rel="stylesheet" href="https://ppete2.github.io/Leaflet.PolylineMeasure/Leaflet.PolylineMeasure.css" />
     <script src="https://ppete2.github.io/Leaflet.PolylineMeasure/Leaflet.PolylineMeasure.js"></script>
     <script src="https://npmcdn.com/leaflet-geometryutil"></script>
-    <script type="text/JavaScript">
-    
+    <script type="text/JavaScript"  crossorigin="use-credentials">
+// Product request
+
+
     var id, target, option;
                 var long, lat
                 if (navigator.geolocation) {
@@ -234,6 +236,7 @@ width: 100%; " class="  uk-search-input uk-animation-fade " type="search" placeh
     dragging: false,
     scrollWheelZoom: "center",
         });
+        
        console.log(position.coords);
       var mae  = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
       mae.setIcon(L.icon({
@@ -319,5 +322,6 @@ var pointList = [pointA, pointB];
     }
     
     </script>
+
 </body>
 </html>
